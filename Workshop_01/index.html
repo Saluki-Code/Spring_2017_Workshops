@@ -1,10 +1,8 @@
 <html>
+
 <head>
     <link rel="stylesheet" type="text/css" href="http://salukicode.com/css/main.css">
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <style>
         #timeline {
             list-style-type: none;
@@ -18,63 +16,63 @@
             background: dodgerblue;
         }
         li:nth-child(1) {
-        	border-top-left-radius: .3em;
-           	border-bottom-left-radius: .3em;
+            border-top-left-radius: .3em;
+            border-bottom-left-radius: .3em;
         }
         li:last-child {
-        	border-top-right-radius: .3em;
-           	border-bottom-right-radius: .3em;
+            border-top-right-radius: .3em;
+            border-bottom-right-radius: .3em;
         }
     </style>
 </head>
 
 <header>
-		<h1>Saluki Code</h1>
-		<nav> Current Workshop Timeline
-			<ul id="timeline">
-				<li>Setup</li>
-				<li>Status</li>
-				<li>Tutorial</li>
-				<li>Workshop</li>
-			</ul>
-		</nav>
+    <h1>Saluki Code</h1>
+    <nav> Current Workshop Timeline
+        <ul id="timeline">
+            <li>Setup</li>
+            <li>Status</li>
+            <li>Tutorial</li>
+            <li>Workshop</li>
+        </ul>
+    </nav>
 </header>
-
+<script src="script.js"></script>
 <script>
-// array for our time segments
-var segments = new TimeSegments({
-	startTime: new Date() // now, TODO: Be creative, think of cool options/functionality to this object!
-});
+    // array for our time segments
+    var segments = new TimeSegments({
+        startTime: new Date() // now, TODO: Be creative, think of cool options/functionality to this object!
+    });
 
-// initialize array with each segment
-$.each( $("#timeline li"), function() {
-	segments.createSegment({
-		base: $(this)
-		// maybe add a duration initializer along with a start time!
-	});
-});
+    // initialize array with each segment
+    $.each($("#timeline li"), function() {
+        segments.createSegment({
+            base: $(this)
+                // maybe add a duration initializer along with a start time!
+        });
+    });
 
-/*
-	The following code initializes the TimeSegments object to implement the following:
-	
-	Setup -- 5:00 to 5:15
-	Status -- 5:15 to 5:20
-	Tutorial -- 5:20 to 5:35
-	Workshop -- 5:35 to 7:00
+    /*
+    	The following code initializes the TimeSegments object to implement the following:
+    	
+    	Setup -- 5:00 to 5:15
+    	Status -- 5:15 to 5:20
+    	Tutorial -- 5:20 to 5:35
+    	Workshop -- 5:35 to 7:00
 
-*/
+    */
 
-segments.getBases()[0].setStartHourMinute(12 + 5, 0); // remember, the hours in the day is (are?) military time
-segments.getBases()[0].setEndHourMinute(12 + 5, 15);
+    segments.getBases()[0].setStartHourMinute(12 + 5, 0); // remember, the hours in the day is (are?) military time
+    segments.getBases()[0].setEndHourMinute(12 + 5, 15);
 
-segments.getBases()[1].setStartHourMinute(12 + 5, 15);
-segments.getBases()[1].setEndHourMinute(12 + 5, 20);
+    segments.getBases()[1].setStartHourMinute(12 + 5, 15);
+    segments.getBases()[1].setEndHourMinute(12 + 5, 20);
 
-segments.getBases()[2].setStartHourMinute(12 + 5, 20);
-segments.getBases()[2].setEndHourMinute(12 + 5, 35);
+    segments.getBases()[2].setStartHourMinute(12 + 5, 20);
+    segments.getBases()[2].setEndHourMinute(12 + 5, 35);
 
-segments.getBases()[2].setStartHourMinute(12 + 5, 35);
-segments.getBases()[2].setEndHourMinute(12 + 7, 0);
+    segments.getBases()[2].setStartHourMinute(12 + 5, 35);
+    segments.getBases()[2].setEndHourMinute(12 + 7, 0);
 </script>
 
 </html>
