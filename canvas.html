@@ -1,0 +1,69 @@
+<html>
+<head>
+	<title>Canvas Stuff</title>
+	<style type="text/css">
+		canvas {
+			width: 200px;
+			height: 100px;
+			border: 1px solid #000;
+			display: block
+		}
+	</style>
+</head>
+<body>
+	<!--Our canvases start here!-->
+	<canvas></canvas>
+	<canvas id="line"></canvas>
+	<canvas id="circle"></canvas>
+	<canvas id="helloWorld"></canvas>
+	<canvas id="helloWorldOutline"></canvas>
+	<canvas id="linearGradient"></canvas>
+	<canvas id="circularGradient"></canvas>
+
+	<script>
+		// First, the line!
+		var c = document.getElementById("line");
+		var ctx = c.getContext("2d");
+		ctx.moveTo(0,0);
+		ctx.lineTo(200,100);
+		ctx.stroke();
+		
+		// Then, the circle.
+		c = document.getElementById("circle");
+		ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(95,50,40,0,2*Math.PI);
+		ctx.stroke();
+		
+		// "Filled" hello world text
+		c = document.getElementById("helloWorld");
+		ctx = c.getContext("2d");
+		ctx.font = "30px Arial";
+		ctx.fillText("Hello World",10,50);
+		
+		// "Stroke" hello world text
+		c = document.getElementById("helloWorldOutline");
+		ctx = c.getContext("2d");
+		ctx.font = "30px Arial";
+		ctx.strokeText("Hello World",10,50);
+		
+		// Linear gradient
+		c = document.getElementById("linearGradient");
+		ctx = c.getContext("2d");
+		var grd = ctx.createLinearGradient(0,0,200,0);
+		grd.addColorStop(0,"red");
+		grd.addColorStop(1,"white");
+		ctx.fillStyle = grd;
+		ctx.fillRect(10,10,150,80);
+		
+		// Circular gradient
+		c = document.getElementById("circularGradient");
+		ctx = c.getContext("2d");
+		grd = ctx.createRadialGradient(75,50,5,90,60,100);
+		grd.addColorStop(0,"red");
+		grd.addColorStop(1,"white");
+		ctx.fillStyle = grd;
+		ctx.fillRect(10,10,150,80);
+	</script>
+</body>
+</html>
