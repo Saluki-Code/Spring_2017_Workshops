@@ -27,8 +27,9 @@ border-bottom: 1px solid black;
 	this.speed = this.canvasWidth/500;
 	this.angle = Math.PI/2;
 	this.angleDiversion = 
-	this.fillStyle = "black";
-	this.shadowColor = "black";
+	this.fillStyle = '#' + Math.floor(Math.random()*16777215).toString(16);
+	this.shadowColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+	
 	this.shadowBlur = 2;
 	this.generation = 0;
 	this.lifespan = 0;
@@ -60,7 +61,10 @@ Snake.prototype = {
 		this.lifespan++;
 		this.die();
 	},
-	
+	rotateColor: function() {
+	  this.shadowColor =   '#' + Math.floor(Math.random()*16777215).toString(16);
+	  this.shadowBlur = '#' + Math.floor(Math.random()*16777215).toString(16);
+	},
 	draw: function() {
 		var context = this.context;
 		context.save();
@@ -146,13 +150,11 @@ Snake.prototype = {
 		}
 	}
 }
-
 SnakeCollection = function() {
 	this.canvas = canvas;
 	
 	this.snakes = [];
 }
-
 SnakeCollection.prototype = {
 	next: function() {
 		n = this.snakes.length;
@@ -165,6 +167,7 @@ SnakeCollection.prototype = {
 	
 	add: function(snake) {
 		this.snakes.push(snake);
+		snake.rotateColor();
 		snake.collection = this;
 	},
 	
@@ -172,16 +175,21 @@ SnakeCollection.prototype = {
 		for (var s in this.snakes)
 			if (this.snakes[s] === snake)
 				this.snakes.splice(s, 1);
+	},
+	reset: function() {
+		n = this.snakes.length;
+		for (var s in this.snakes) {
+			var snake = this.snakes[s];
+			this.remove(snake);
+		}	    
 	}
 }
-
 function randHex() {
 	var num = Math.round(Math.random() * 255).toString(16);
 	if (num.length == 1)
 		num = "0"+num;
 	return num;
 }
-
 jQuery(function() {
 	// Convenience
 	$canvas = jQuery("canvas#canvastree");
@@ -195,9 +203,6 @@ jQuery(function() {
 	// Set actual canvas size to match css
 	$canvas.attr("width", width);
 	$canvas.attr("height", height);
-	
-	// Information
-	jQuery("#info").html("Size: "+canvas.width+"x"+canvas.height);
 	
 	// Frame rate
 	var frame = 0;
@@ -217,25 +222,8 @@ jQuery(function() {
 	var interval = setInterval(function() {
 		snakes.next();
 		
+		
 		frame++;
 	}, 0);
-	
-	// fps
-	// var fpsInterval = setInterval(function() {
-	// 	jQuery("#fps").html(frame+" fps<br/>"+snakes.snakes.length+" branches running");
-	// 	frame = 0;
-	// 	if (snakes.snakes.length == 0) {
-	// 		clearInterval(interval);
-	// 		clearInterval(fpsInterval);
-	// 		var delay = 1500;
-	// 		jQuery("#info-container").fadeOut(1500, function(){
-	// 			jQuery("#info-container").html("Refresh for more delicious trees :)").fadeIn(delay, function() {
-	// 				setTimeout(function() {
-	// 					jQuery("#info-container").fadeOut(delay);
-	// 				}, delay*3)
-	// 			});
-	// 		});
-	// 	}
-	// }, 1000);
 });
 </script>
